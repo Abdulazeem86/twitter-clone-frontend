@@ -14,31 +14,27 @@ function Tweetbox() {
 
   const [feed, setFeed] = useState("");
 
-  const [data, setData] = useState("");
-
   const inputHandler = (event) => {
+    
     setFeed(event.target.value)
-    setData({
+  }
+
+  const addPost = () => {
+    // console.log(data)
+    var data = {
       token: sessionStorage.getItem("token"),
       name: sessionStorage.getItem("name"),
       username: sessionStorage.getItem("username"),
       userId: sessionStorage.getItem("userId"),
       Feed: feed
-    })
-  }
-
-  const addPost = () => {
-    console.log(data)
+    }
     axios.post("http://localhost:3001/addpost", data)
       .then((response) => {
         console.log(response.data)
         if (response.data.Status == "Post added successfully") {
           // alert("Successfully added the Post")
-          setData(
+          setFeed(
             {
-              name: sessionStorage.getItem("name"),
-              username: sessionStorage.getItem("username"),
-              userId: sessionStorage.getItem("userId"),
               Feed: ""
             }
           )

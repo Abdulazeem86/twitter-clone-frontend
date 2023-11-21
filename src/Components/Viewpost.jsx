@@ -12,19 +12,18 @@ import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
 function Viewpost() {
 
   var [post, setPost] = useState([]);
-  const [newPostAdded, setNewPostAdded] = useState(false);
-
+ 
   useEffect(() => {
     postview()
   }, [])
 
   const postview = async () => {
 
-    var data = { "userId": sessionStorage.getItem("userId") };
+    var data = {token: sessionStorage.getItem("token"), "userId": sessionStorage.getItem("userId"), 
+   };
     try {
       const response = await axios.post("http://localhost:3001/viewpost", data);
       setPost(response.data);
-      setNewPostAdded(!newPostAdded)
       console.log(response.data);
       console.log(post);
     } catch (err) {
