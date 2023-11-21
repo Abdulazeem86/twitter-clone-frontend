@@ -1,0 +1,25 @@
+.button {
+    width: 60%;
+    border-color: lightgrey;
+    border-radius: 20px;
+}
+
+.clause {
+    font-size:x-small;
+    font-weight: 350;
+
+}
+
+.container{
+text-align: center;
+}
+
+.signin-button:hover{
+background-color:rgb(153, 189, 227);
+}
+
+.button:hover{
+    background-color: lightgrey;
+    text-decoration-color: black;
+}
+
