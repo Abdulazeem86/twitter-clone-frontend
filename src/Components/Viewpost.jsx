@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Viewpost.css";
-import axios from 'axios';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import EqualizerTwoToneIcon from '@material-ui/icons/EqualizerTwoTone';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
+import { api } from './api';
 
 
 
@@ -22,7 +22,7 @@ function Viewpost() {
     var data = {token: sessionStorage.getItem("token"), "userId": sessionStorage.getItem("userId"), 
    };
     try {
-      const response = await axios.post("http://localhost:3001/viewpost", data);
+      const response = await api.post("/viewpost", data);
       setPost(response.data);
       console.log(response.data);
       console.log(post);

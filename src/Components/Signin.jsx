@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import Logo from '../Images/Logo.jpg'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import "./Signin.css"
 import AppleIcon from '@material-ui/icons/Apple';
+import { validate } from './api';
+
 
 
 function Signin() {
@@ -26,35 +27,14 @@ function Signin() {
     )
   }
 
-  const validate = async () => {
+  const signin = ()=>{
+    validate(data).then(()=>{
+      Navigate("/home")
+    }).catch((err)=>{
 
-    var Data = await axios.post(`http://localhost:3001/signin`, data)
-      .then(
-        (res) => {
-          if (res.data.status == "success") {
-
-            let token = res.data.token;
-            let userId = res.data.data._id;
-            let username = res.data.data.username;
-            let name = res.data.data.name;
-
-
-            sessionStorage.setItem("token", token);
-            sessionStorage.setItem("userId", userId);
-            sessionStorage.setItem("username", username);
-            sessionStorage.setItem("name", name);
-
-            Navigate("/home")
-          }
-          else {
-            alert("invalid credentials")
-          }
-        }
-      )
-      .catch((err) => {
-        console.log(err)
-      })
+    })
   }
+  
 
   return (
     <div className="container signin">
@@ -99,7 +79,7 @@ function Signin() {
             </div>
 
             <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-4">
-              <button onClick={validate} className="btn bg-dark bg-opacity-75 text-light" style={{ width: '100%' }}>Login</button>
+              <button onClick={signin} className="btn bg-dark bg-opacity-75 text-light" style={{ width: '100%' }}>Login</button>
             </div>
             <div className='mt-5'>
               <p>Don't have an account? <a href="#">Signup</a></p>
